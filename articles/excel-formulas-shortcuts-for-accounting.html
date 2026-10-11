@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn essential Excel formulas and keyboard shortcuts for accounting, with practical examples for vendor reconciliation, GST, expenses, ageing and reporting.">
+  <meta name="keywords" content="Excel formulas for accountants, Excel shortcut keys, accounting in Excel, SUMIFS, VLOOKUP, XLOOKUP, vendor reconciliation">
+  <title>Excel Formulas and Shortcut Keys for Accounting | AccountPro Skills</title>
+  <link rel="canonical" href="https://accountingskillspro.github.io/accounts/articles/excel-formulas-shortcuts-for-accounting.html">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="topbar">Learn practical skills. Build your accounting career.</div>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="AccountPro Skills home"><span class="brand-mark">AP</span><span><strong>AccountPro Skills</strong><small>Learn. Apply. Grow.</small></span></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menu ☰</button>
+    <nav id="main-nav"><a href="../index.html#topics">Topics</a><a href="../index.html#latest">Articles</a><a href="../downloads.html">Free Downloads</a><a href="../contact.html">Contact</a></nav>
+  </header>
+  <main class="content-page">
+    <p class="eyebrow">MICROSOFT EXCEL • ACCOUNTING PRACTICE</p>
+    <h1>Excel Formulas and Shortcut Keys Every Accountant Should Know</h1>
+    <p>Excel is widely used in accounting for reconciliations, expense analysis, invoice checking, ageing reports, GST data review and month-end reporting. This practical guide explains common formulas and keyboard shortcuts with examples you can try in a worksheet.</p>
+    <div class="note"><strong>Practice tip:</strong> Create a copy of your working file before testing formulas. Examples below use commas between formula arguments; depending on your Excel regional settings, you may need semicolons instead.</div>
+
+    <h2>1. Sample accounting data</h2>
+    <p>Imagine a worksheet with these columns: A = Vendor, B = Invoice No., C = Invoice Date, D = Amount, E = Due Date, F = Paid Amount. Enter sample transactions from row 2 onwards. The examples below use these columns unless stated otherwise.</p>
+
+    <h2>2. Essential Excel formulas for accounting</h2>
+    <h3>SUM — total expenses, invoices or payments</h3>
+    <p><code>=SUM(D2:D100)</code></p>
+    <p>Adds all numeric values in D2 through D100. Use it to total invoices, expenses, receipts or payments.</p>
+
+    <h3>SUMIF — total for one condition</h3>
+    <p><code>=SUMIF(A2:A100,"ABC Traders",D2:D100)</code></p>
+    <p>Adds invoice amounts for ABC Traders. Useful for a vendor-wise expense total.</p>
+
+    <h3>SUMIFS — total with multiple conditions</h3>
+    <p><code>=SUMIFS(D2:D100,A2:A100,"ABC Traders",C2:C100,">="&amp;DATE(2026,10,1),C2:C100,"&lt;"&amp;DATE(2026,11,1))</code></p>
+    <p>Totals invoices for ABC Traders dated in October 2026. Useful for vendor- and month-wise reporting. Update the dates for your reporting period.</p>
+
+    <h3>IF — show a result based on a condition</h3>
+    <p><code>=IF(D2=F2,"Paid","Check")</code></p>
+    <p>Shows Paid when invoice amount equals paid amount; otherwise shows Check. In real files, account for partial payments and credit notes according to your process.</p>
+
+    <h3>IFERROR — handle formula errors neatly</h3>
+    <p><code>=IFERROR(D2/F2,0)</code></p>
+    <p>Returns 0 instead of an error if the division fails. Use an appropriate message or blank instead of 0 when a zero could be mistaken for a real accounting value.</p>
+
+    <h3>COUNTIF and COUNTIFS — count invoices or duplicates</h3>
+    <p><code>=COUNTIF(B2:B100,B2)</code></p>
+    <p>Counts how often the invoice number in B2 appears in the range. A result greater than 1 can flag a possible duplicate; verify vendor, date, amount and source documents before concluding it is a duplicate.</p>
+    <p><code>=COUNTIFS(A2:A100,A2,B2:B100,B2)</code></p>
+    <p>Counts rows where both vendor and invoice number match.</p>
+
+    <h3>XLOOKUP — retrieve matching information</h3>
+    <p><code>=XLOOKUP(B2,InvoiceRegister!B:B,InvoiceRegister!D:D,"Not found")</code></p>
+    <p>Looks for the invoice number in column B of InvoiceRegister and returns the corresponding amount from column D. XLOOKUP is available in newer Excel versions; use VLOOKUP or INDEX/MATCH if your version does not support it.</p>
+
+    <h3>VLOOKUP — lookup for older Excel versions</h3>
+    <p><code>=IFERROR(VLOOKUP(B2,InvoiceRegister!B:D,3,FALSE),"Not found")</code></p>
+    <p>Searches for B2 in the first column of B:D and returns the third column of that selected range. FALSE requests an exact match.</p>
+
+    <h3>ROUND — round calculated amounts</h3>
+    <p><code>=ROUND(D2*18%,2)</code></p>
+    <p>Calculates 18% of the amount in D2 and rounds the result to two decimal places. Use the actual applicable tax rate and check tax rules before posting GST entries.</p>
+
+    <h3>SUBTOTAL — total filtered records</h3>
+    <p><code>=SUBTOTAL(9,D2:D100)</code></p>
+    <p>Returns a sum that responds to filtered rows. Handy for reviewing selected vendors or expense categories after applying filters.</p>
+
+    <h3>TEXT — display dates in a readable format</h3>
+    <p><code>=TEXT(C2,"dd-mmm-yyyy")</code></p>
+    <p>Displays a date like 11-Oct-2026. Use this for presentation only; keep actual date values for date calculations and sorting.</p>
+
+    <h2>3. Practical accounting formulas</h2>
+    <h3>Outstanding amount</h3>
+    <p>If D is invoice amount and F is paid amount: <code>=D2-F2</code>. Confirm how credit notes, withholding and adjustments are handled in your ledger.</p>
+    <h3>Days overdue</h3>
+    <p>If E is the due date and G is outstanding amount: <code>=IF(G2&gt;0,MAX(0,TODAY()-E2),0)</code>. This returns zero for invoices not outstanding or not yet overdue. Use your organisation's ageing policy for reporting.</p>
+    <h3>Ageing bucket</h3>
+    <p>For days overdue in H2: <code>=IF(G2=0,"Settled",IF(H2&lt;=30,"1-30 days",IF(H2&lt;=60,"31-60 days",IF(H2&lt;=90,"61-90 days","90+ days"))))</code>. Adjust buckets to match your company's policy.</p>
+    <h3>Bank reconciliation difference</h3>
+    <p>If adjusted book balance is B2 and adjusted bank balance is C2: <code>=B2-C2</code>. A zero difference indicates the two adjusted balances agree, but unmatched entries still need investigation.</p>
+    <h3>3-way matching quantity check</h3>
+    <p>If PO quantity is E2, GRN received quantity is F2 and invoice quantity is G2: <code>=IF(AND(E2=F2,F2=G2),"MATCH","INVESTIGATE")</code>. In production files, use agreed tolerances and investigate rate, amount, tax and document differences too. See our <a class="text-link" href="three-way-matching.html">3-way matching guide</a>.</p>
+
+    <h2>4. Excel shortcut keys for accountants (Windows)</h2>
+    <table>
+      <thead><tr><th>Shortcut</th><th>What it does</th><th>Accounting use</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>Ctrl + Shift + L</kbd></td><td>Toggle filters</td><td>Filter vendor, invoice or GL data.</td></tr>
+        <tr><td><kbd>Alt + =</kbd></td><td>Insert AutoSum</td><td>Quickly total an amount column.</td></tr>
+        <tr><td><kbd>Ctrl + 1</kbd></td><td>Open Format Cells</td><td>Format dates, numbers and currency.</td></tr>
+        <tr><td><kbd>Ctrl + Arrow</kbd></td><td>Jump to the edge of a data region</td><td>Navigate long ledgers quickly.</td></tr>
+        <tr><td><kbd>Ctrl + Shift + Arrow</kbd></td><td>Select to the edge of a data region</td><td>Select transaction blocks for review.</td></tr>
+        <tr><td><kbd>Ctrl + T</kbd></td><td>Create an Excel Table</td><td>Make transaction data easier to filter and expand.</td></tr>
+        <tr><td><kbd>F4</kbd></td><td>Repeat last action in many contexts; while editing a formula, cycle cell references</td><td>Quickly apply formatting or change A1 to $A$1 references while editing.</td></tr>
+        <tr><td><kbd>Ctrl + ;</kbd></td><td>Insert current date</td><td>Date-stamp a manual working entry when appropriate.</td></tr>
+        <tr><td><kbd>Ctrl + Shift + $</kbd></td><td>Apply currency format</td><td>Format invoice and payment values.</td></tr>
+        <tr><td><kbd>Ctrl + Shift + %</kbd></td><td>Apply percentage format</td><td>Display tax rates or variance percentages.</td></tr>
+        <tr><td><kbd>Ctrl + F</kbd></td><td>Find</td><td>Locate invoice numbers, vendors or ledger references.</td></tr>
+        <tr><td><kbd>Ctrl + H</kbd></td><td>Find and Replace</td><td>Standardise text carefully; review before replacing accounting codes.</td></tr>
+        <tr><td><kbd>Ctrl + Page Up / Page Down</kbd></td><td>Switch worksheets</td><td>Move between data, reconciliation and summary tabs.</td></tr>
+        <tr><td><kbd>Ctrl + Z</kbd></td><td>Undo</td><td>Reverse an accidental edit.</td></tr>
+        <tr><td><kbd>Ctrl + S</kbd></td><td>Save workbook</td><td>Save working papers frequently.</td></tr>
+      </tbody>
+    </table>
+    <p><small>Shortcuts can vary by Excel version, operating system and keyboard layout. These examples are for Excel on Windows.</small></p>
+
+    <h2>5. How to use formulas safely in accounting</h2>
+    <ol>
+      <li>Keep a protected copy of the original export or source file.</li>
+      <li>Convert clean transaction data into an Excel Table with <kbd>Ctrl + T</kbd>.</li>
+      <li>Use unique references and exact-match lookups wherever possible.</li>
+      <li>Check formulas on a few known transactions before filling them down.</li>
+      <li>Reconcile totals to the source ledger or report and investigate exceptions.</li>
+      <li>Document assumptions, tolerances and manual adjustments.</li>
+    </ol>
+    <div class="note"><strong>Free practice resource:</strong> Visit the <a class="text-link" href="../downloads.html">AccountPro Skills Free Downloads page</a> to try our reconciliation and cash-flow templates. You can also practise with the <a class="text-link" href="three-way-matching.html">3-way matching guide</a>.</div>
+    <h2>Conclusion</h2>
+    <p>Start with SUM, SUMIF, SUMIFS, IF, COUNTIF and lookup formulas, then practise shortcuts on a copy of real-world style accounting data. Excel supports analysis and review, but it does not replace source-document checks, accounting judgement or your organisation's approval controls.</p>
+  </main>
+  <footer><div class="footer-brand"><span class="brand-mark">AP</span><strong>AccountPro Skills</strong></div><p>Practical Accounting, GST, Excel &amp; SAP Skills</p><div class="footer-links"><a href="../index.html#about">About</a><a href="../privacy-policy.html">Privacy Policy</a><a href="../contact.html">Contact</a></div><small>© 2026 AccountPro Skills. All rights reserved.</small></footer>
+  <script src="../assets/script.js"></script>
+</body>
+</html>
