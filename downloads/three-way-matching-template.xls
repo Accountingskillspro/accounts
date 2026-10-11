@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:x="urn:schemas-microsoft-com:office:excel">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office"><Title>AccountPro Skills 3-Way Matching Template</Title><Author>AccountPro Skills</Author><Description>Starter template to compare purchase orders, goods receipts and supplier invoices.</Description></DocumentProperties>
+ <Styles>
+  <Style ss:ID="Header"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#17365D" ss:Pattern="Solid"/></Style>
+  <Style ss:ID="Mismatch"><Font ss:Color="#C00000" ss:Bold="1"/></Style>
+  <Style ss:ID="Match"><Font ss:Color="#008000" ss:Bold="1"/></Style>
+  <Style ss:ID="Currency"><NumberFormat ss:Format="₹#,##0.00"/></Style>
+ </Styles>
+ <Worksheet ss:Name="Instructions"><Table>
+  <Row><Cell><Data ss:Type="String">AccountPro Skills — 3-Way Matching Template</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">Purpose: Compare Purchase Order (PO), Goods Receipt Note (GRN), and supplier invoice before payment.</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">Step 1: Enter the PO number, item, ordered quantity and approved PO rate on PO_Data.</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">Step 2: Enter received quantity and GRN reference on GRN_Data.</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">Step 3: Enter supplier invoice quantity, invoice rate and invoice number on Invoice_Data.</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">Step 4: Review the Matching sheet. Investigate any MISMATCH before payment approval.</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">Important: Sample data is illustrative. Confirm tax, freight, tolerance and approval rules with your company policy.</Data></Cell></Row>
+ </Table></Worksheet>
+ <Worksheet ss:Name="PO_Data"><Table>
+  <Row ss:StyleID="Header"><Cell><Data ss:Type="String">PO Number</Data></Cell><Cell><Data ss:Type="String">Item</Data></Cell><Cell><Data ss:Type="String">Ordered Qty</Data></Cell><Cell><Data ss:Type="String">PO Rate</Data></Cell><Cell><Data ss:Type="String">PO Amount</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">PO-1001</Data></Cell><Cell><Data ss:Type="String">Raw Material A</Data></Cell><Cell><Data ss:Type="Number">100</Data></Cell><Cell><Data ss:Type="Number">50</Data></Cell><Cell ss:Formula="=RC[-2]*RC[-1]" ss:StyleID="Currency"><Data ss:Type="Number">5000</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">PO-1002</Data></Cell><Cell><Data ss:Type="String">Packing Material B</Data></Cell><Cell><Data ss:Type="Number">200</Data></Cell><Cell><Data ss:Type="Number">12.5</Data></Cell><Cell ss:Formula="=RC[-2]*RC[-1]" ss:StyleID="Currency"><Data ss:Type="Number">2500</Data></Cell></Row>
+ </Table></Worksheet>
+ <Worksheet ss:Name="GRN_Data"><Table>
+  <Row ss:StyleID="Header"><Cell><Data ss:Type="String">PO Number</Data></Cell><Cell><Data ss:Type="String">GRN Number</Data></Cell><Cell><Data ss:Type="String">Received Qty</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">PO-1001</Data></Cell><Cell><Data ss:Type="String">GRN-501</Data></Cell><Cell><Data ss:Type="Number">100</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">PO-1002</Data></Cell><Cell><Data ss:Type="String">GRN-502</Data></Cell><Cell><Data ss:Type="Number">190</Data></Cell></Row>
+ </Table></Worksheet>
+ <Worksheet ss:Name="Invoice_Data"><Table>
+  <Row ss:StyleID="Header"><Cell><Data ss:Type="String">PO Number</Data></Cell><Cell><Data ss:Type="String">Invoice Number</Data></Cell><Cell><Data ss:Type="String">Invoice Qty</Data></Cell><Cell><Data ss:Type="String">Invoice Rate</Data></Cell><Cell><Data ss:Type="String">Invoice Amount</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">PO-1001</Data></Cell><Cell><Data ss:Type="String">INV-701</Data></Cell><Cell><Data ss:Type="Number">100</Data></Cell><Cell><Data ss:Type="Number">50</Data></Cell><Cell ss:Formula="=RC[-2]*RC[-1]" ss:StyleID="Currency"><Data ss:Type="Number">5000</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">PO-1002</Data></Cell><Cell><Data ss:Type="String">INV-702</Data></Cell><Cell><Data ss:Type="Number">200</Data></Cell><Cell><Data ss:Type="Number">12.5</Data></Cell><Cell ss:Formula="=RC[-2]*RC[-1]" ss:StyleID="Currency"><Data ss:Type="Number">2500</Data></Cell></Row>
+ </Table></Worksheet>
+ <Worksheet ss:Name="Matching"><Table>
+  <Row ss:StyleID="Header"><Cell><Data ss:Type="String">PO Number</Data></Cell><Cell><Data ss:Type="String">Ordered Qty</Data></Cell><Cell><Data ss:Type="String">Received Qty</Data></Cell><Cell><Data ss:Type="String">Invoice Qty</Data></Cell><Cell><Data ss:Type="String">PO Rate</Data></Cell><Cell><Data ss:Type="String">Invoice Rate</Data></Cell><Cell><Data ss:Type="String">PO Amount</Data></Cell><Cell><Data ss:Type="String">Invoice Amount</Data></Cell><Cell><Data ss:Type="String">Qty Check</Data></Cell><Cell><Data ss:Type="String">Rate Check</Data></Cell><Cell><Data ss:Type="String">Overall Status</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">PO-1001</Data></Cell><Cell><Data ss:Type="Number">100</Data></Cell><Cell><Data ss:Type="Number">100</Data></Cell><Cell><Data ss:Type="Number">100</Data></Cell><Cell><Data ss:Type="Number">50</Data></Cell><Cell><Data ss:Type="Number">50</Data></Cell><Cell ss:Formula="=RC[-5]*RC[-2]" ss:StyleID="Currency"><Data ss:Type="Number">5000</Data></Cell><Cell ss:Formula="=RC[-4]*RC[-2]" ss:StyleID="Currency"><Data ss:Type="Number">5000</Data></Cell><Cell ss:Formula="=IF(AND(RC[-7]=RC[-6],RC[-7]=RC[-5]),&quot;MATCH&quot;,&quot;MISMATCH&quot;)"><Data ss:Type="String">MATCH</Data></Cell><Cell ss:Formula="=IF(RC[-4]=RC[-3],&quot;MATCH&quot;,&quot;MISMATCH&quot;)"><Data ss:Type="String">MATCH</Data></Cell><Cell ss:Formula="=IF(AND(RC[-2]=&quot;MATCH&quot;,RC[-1]=&quot;MATCH&quot;),&quot;MATCH&quot;,&quot;MISMATCH&quot;)" ss:StyleID="Match"><Data ss:Type="String">MATCH</Data></Cell></Row>
+  <Row><Cell><Data ss:Type="String">PO-1002</Data></Cell><Cell><Data ss:Type="Number">200</Data></Cell><Cell><Data ss:Type="Number">190</Data></Cell><Cell><Data ss:Type="Number">200</Data></Cell><Cell><Data ss:Type="Number">12.5</Data></Cell><Cell><Data ss:Type="Number">12.5</Data></Cell><Cell ss:Formula="=RC[-5]*RC[-2]" ss:StyleID="Currency"><Data ss:Type="Number">2500</Data></Cell><Cell ss:Formula="=RC[-4]*RC[-2]" ss:StyleID="Currency"><Data ss:Type="Number">2500</Data></Cell><Cell ss:Formula="=IF(AND(RC[-7]=RC[-6],RC[-7]=RC[-5]),&quot;MATCH&quot;,&quot;MISMATCH&quot;)" ss:StyleID="Mismatch"><Data ss:Type="String">MISMATCH</Data></Cell><Cell ss:Formula="=IF(RC[-4]=RC[-3],&quot;MATCH&quot;,&quot;MISMATCH&quot;)"><Data ss:Type="String">MATCH</Data></Cell><Cell ss:Formula="=IF(AND(RC[-2]=&quot;MATCH&quot;,RC[-1]=&quot;MATCH&quot;),&quot;MATCH&quot;,&quot;MISMATCH&quot;)" ss:StyleID="Mismatch"><Data ss:Type="String">MISMATCH</Data></Cell></Row>
+ </Table></Worksheet>
+</Workbook>
