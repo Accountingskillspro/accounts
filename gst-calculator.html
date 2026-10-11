@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use the free GST calculator to estimate GST amount, CGST, SGST, IGST and invoice total from a taxable value.">
+  <title>Free GST Calculator | AccountPro Skills</title>
+  <link rel="canonical" href="https://accountingskillspro.github.io/accounts/gst-calculator.html">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .calculator{border:1px solid var(--line);border-radius:16px;padding:24px;background:#f8faff;margin:24px 0}
+    .calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .calc-field label{display:block;font-weight:750;color:var(--navy);margin-bottom:6px}
+    .calc-field input,.calc-field select{width:100%;padding:12px;border:1px solid #ccd7e7;border-radius:8px;background:white;font:inherit;color:var(--ink)}
+    .calc-result{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+    .result-item{padding:15px;background:white;border:1px solid var(--line);border-radius:10px}
+    .result-item span{display:block;color:var(--muted);font-size:.84rem}
+    .result-item strong{font-size:1.2rem;color:var(--navy);overflow-wrap:anywhere}
+    .result-item.total{background:#eaf1ff;border-color:#cbdcff}
+    .calc-note{font-size:.85rem;color:var(--muted)}
+    @media(max-width:600px){.calc-grid,.calc-result{grid-template-columns:1fr}.calculator{padding:16px}}
+  </style>
+</head>
+<body>
+  <div class="topbar">Learn practical skills. Build your accounting career.</div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="AccountPro Skills home"><span class="brand-mark">AP</span><span><strong>AccountPro Skills</strong><small>Learn. Apply. Grow.</small></span></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menu ☰</button>
+    <nav id="main-nav"><a href="index.html#topics">Topics</a><a href="index.html#latest">Articles</a><a href="gst-calculator.html">GST Calculator</a><a href="downloads.html">Free Downloads</a><a href="contact.html">Contact</a></nav>
+  </header>
+  <main class="content-page">
+    <p class="eyebrow">FREE ACCOUNTING TOOL</p>
+    <h1>GST Calculator</h1>
+    <p>Estimate GST and invoice total from a taxable value. Choose intra-state supply to split the GST equally into CGST and SGST, or inter-state supply to calculate IGST.</p>
+    <div class="calculator">
+      <div class="calc-grid">
+        <div class="calc-field"><label for="taxable">Taxable value (₹)</label><input id="taxable" type="number" min="0" step="0.01" value="10000" inputmode="decimal"></div>
+        <div class="calc-field"><label for="rate">GST rate</label><select id="rate"><option value="0">0%</option><option value="0.25">0.25%</option><option value="3">3%</option><option value="5">5%</option><option value="12">12%</option><option value="18" selected>18%</option><option value="28">28%</option></select></div>
+        <div class="calc-field"><label for="supply">Type of supply</label><select id="supply"><option value="intra">Intra-state (CGST + SGST)</option><option value="inter">Inter-state (IGST)</option></select></div>
+        <div class="calc-field"><label for="rounding">Display precision</label><select id="rounding"><option value="2" selected>2 decimal places</option><option value="0">Whole rupees</option></select></div>
+      </div>
+      <p><button class="button primary" id="calculate" type="button">Calculate GST</button> <button class="button secondary" id="reset" type="button">Reset</button></p>
+      <div class="calc-result" aria-live="polite">
+        <div class="result-item"><span>Taxable value</span><strong id="out-base">₹10,000.00</strong></div>
+        <div class="result-item"><span>GST amount</span><strong id="out-tax">₹1,800.00</strong></div>
+        <div class="result-item"><span>CGST</span><strong id="out-cgst">₹900.00</strong></div>
+        <div class="result-item"><span>SGST</span><strong id="out-sgst">₹900.00</strong></div>
+        <div class="result-item"><span>IGST</span><strong id="out-igst">₹0.00</strong></div>
+        <div class="result-item total"><span>Invoice total</span><strong id="out-total">₹11,800.00</strong></div>
+      </div>
+      <p class="calc-note" id="calc-message">Estimate only. Verify the applicable GST rate, place of supply, exemptions and rounding rules before issuing an invoice.</p>
+    </div>
+    <h2>How to use this calculator</h2>
+    <ol><li>Enter the taxable value before GST.</li><li>Select the applicable GST rate for your goods or services.</li><li>Choose intra-state or inter-state based on the place-of-supply rules for your transaction.</li><li>Review the tax split and total. This tool does not decide whether a supply is taxable or which rate applies.</li></ol>
+    <div class="note"><strong>Important:</strong> This is an educational estimate, not tax advice or an invoice generator. GST treatment can depend on the transaction and current law. Check official guidance and your tax professional where needed.</div>
+    <p>Reference: <a class="text-link" href="https://cbic-gst.gov.in/" target="_blank" rel="noopener noreferrer">CBIC GST portal</a>.</p>
+  </main>
+  <footer><div class="footer-brand"><span class="brand-mark">AP</span><strong>AccountPro Skills</strong></div><p>Practical Accounting, GST, Excel & SAP Skills</p><div class="footer-links"><a href="index.html#about">About</a><a href="privacy-policy.html">Privacy Policy</a><a href="contact.html">Contact</a></div><small>© 2026 AccountPro Skills. All rights reserved.</small></footer>
+  <script src="assets/script.js"></script>
+  <script>
+    (function(){
+      const $ = id => document.getElementById(id);
+      const money = value => {
+        const decimals = Number($('rounding').value);
+        return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',minimumFractionDigits:decimals,maximumFractionDigits:decimals}).format(value);
+      };
+      function calculate(){
+        const base = Number($('taxable').value);
+        const rate = Number($('rate').value);
+        if(!Number.isFinite(base) || base < 0){ $('calc-message').textContent='Please enter a valid non-negative taxable value.'; return; }
+        const tax = base * rate / 100;
+        const intra = $('supply').value === 'intra';
+        $('out-base').textContent = money(base);
+        $('out-tax').textContent = money(tax);
+        $('out-cgst').textContent = money(intra ? tax/2 : 0);
+        $('out-sgst').textContent = money(intra ? tax/2 : 0);
+        $('out-igst').textContent = money(intra ? 0 : tax);
+        $('out-total').textContent = money(base + tax);
+        $('calc-message').textContent = 'Estimate only. Verify the applicable GST rate, place of supply, exemptions and rounding rules before issuing an invoice.';
+      }
+      $('calculate').addEventListener('click',calculate);
+      ['taxable','rate','supply','rounding'].forEach(id => $(id).addEventListener('change',calculate));
+      $('reset').addEventListener('click',()=>{$('taxable').value='10000';$('rate').value='18';$('supply').value='intra';$('rounding').value='2';calculate();});
+      calculate();
+    })();
+  </script>
+</body>
+</html>
