@@ -2,7 +2,6 @@ Monthly Cash Flow Tracker,,,,,,
 Month,,Prepared by,,Opening Cash Balance (INR),,
 
 Date,Category,Description / Reference,Cash Inflow (INR),Cash Outflow (INR),Net Movement (INR),Notes
-,,,,,"=IF(COUNTA(D4:E4)=0,"""",N(D4)-N(E4))",
 ,,,,,"=IF(COUNTA(D5:E5)=0,"""",N(D5)-N(E5))",
 ,,,,,"=IF(COUNTA(D6:E6)=0,"""",N(D6)-N(E6))",
 ,,,,,"=IF(COUNTA(D7:E7)=0,"""",N(D7)-N(E7))",
@@ -102,10 +101,11 @@ Date,Category,Description / Reference,Cash Inflow (INR),Cash Outflow (INR),Net M
 ,,,,,"=IF(COUNTA(D101:E101)=0,"""",N(D101)-N(E101))",
 ,,,,,"=IF(COUNTA(D102:E102)=0,"""",N(D102)-N(E102))",
 ,,,,,"=IF(COUNTA(D103:E103)=0,"""",N(D103)-N(E103))",
+,,,,,"=IF(COUNTA(D104:E104)=0,"""",N(D104)-N(E104))",
 
-Total Inflow,,,=SUM(D4:D103),,,
-Total Outflow,,,,=SUM(E4:E103),,
-Net Cash Movement,,,,,=SUM(F4:F103),
-Closing Cash Balance,,,,,"=IF(E2="""","""",E2+F106)",
+Total Inflow,,,=SUM(D5:D104),,,
+Total Outflow,,,,=SUM(E5:E104),,
+Net Cash Movement,,,,,=SUM(F5:F104),
+Closing Cash Balance,,,,,"=IF(F2="""","""",F2+F108)",
 
-How to use,Enter each receipt in Inflow and each payment in Outflow. Use one row per transaction and check that opening balance is entered in cell E2.
+How to use,Enter the opening balance in F2. Enter each receipt in Inflow and each payment in Outflow. Use one row per transaction.
